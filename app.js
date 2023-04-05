@@ -9,7 +9,6 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors());
-//process.setMaxListeners(0);
 
 routes(app);
 

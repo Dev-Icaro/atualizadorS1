@@ -2,6 +2,17 @@ const dataBase = require('../models');
 
 class atualizacaoController {
 
+   static async getAllAtualizacoes(req, res){
+      try {
+         const atualizacoes = await dataBase.atualizacoes.findAll();
+
+         return res.status(200).json(atualizacoes);
+      } 
+      catch (error) {
+         return res.status(500).json(error.message);
+      };
+   };
+
    static async getAtualizacao(req, res) {
       try {
          const { cnpj } = req.params;
@@ -12,8 +23,7 @@ class atualizacaoController {
             }
          });
 
-         const atualizar = count > 0 ? true : false;
-         return res.status(200).json({ atualizar });
+         return count > 0 ? res.redirect('/atualizacao/dataExecutavel') : res.status(200).json({ atualizar: false });
       }
       catch(error){
          return res.status(500).json(error.message);
