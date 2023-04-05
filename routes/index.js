@@ -1,5 +1,6 @@
-const bodyParser = require('body-parser');
+const bodyParser       = require('body-parser');
 const atualizacaoRoute = require('../routes/atualizacaoRoute');
+const configRoute      = require('../routes/configsRoute');
 const authenticateReq  = require('../services/auth');
 
 module.exports = app => {
@@ -7,6 +8,7 @@ module.exports = app => {
       bodyParser.urlencoded({ extended: true }),
       bodyParser.json(),
       authenticateReq,
+      configRoute,
       atualizacaoRoute
    );
 };
