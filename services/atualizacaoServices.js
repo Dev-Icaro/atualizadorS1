@@ -2,12 +2,12 @@ const dataBase         = require('../api/models');
 const configModel      = dataBase.config;
 const atualizacaoModel = dataBase.atualizacoes;
 
-async function getDataExe(req, res){
+async function getDataExe(){
    try {
       const config = await configModel.findOne({ where: { id: Number(1) }})
       const dataExe = new Date(config.dataExe).toLocaleString('pt-BR');
 
-      return res.status(200).json({ "atualizar": true, dataExe });   
+      return dataExe;
    } 
    catch (error) {
       return res.status(500).json(error.message);

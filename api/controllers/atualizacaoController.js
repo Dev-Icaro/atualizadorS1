@@ -1,3 +1,4 @@
+const { getDataExe } = require('../../services/atualizacaoServices');
 const dataBase = require('../models');
 
 class atualizacaoController {
@@ -22,8 +23,8 @@ class atualizacaoController {
                cnpj: String(cnpj)
             }
          });
-
-         return count > 0 ? res.redirect('/atualizacao/dataExecutavel') : res.status(200).json({ atualizar: false });
+         const dataExe = await getDataExe();
+         return count > 0 ? res.status(200).json({ atualizar: true, dataExe }) : res.status(200).json({ atualizar: false });
       }
       catch(error){
          return res.status(500).json(error.message);
