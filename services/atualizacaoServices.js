@@ -34,7 +34,7 @@ async function validaPostAtualizacao(req, res, next){
       const { cnpj } = req.params;
       
       return await atualizacaoModel.count({ where: { cnpj: String(cnpj) }}) > 0 ? 
-         res.status(400).json({message: "cnpj já marcado para atualizar"})
+         res.status(200).json({message: "cnpj já marcado para atualizar"})
          :
          next();
    } 

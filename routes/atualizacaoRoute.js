@@ -9,9 +9,6 @@ router.get('/atualizacao',
 );
 
 router.route('/atualizacao/dataExecutavel')
-   .get(
-      atualizacaoServices.getDataExe
-   )
    .put(
       atualizacaoServices.putDataExe
    )
