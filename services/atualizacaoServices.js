@@ -24,6 +24,7 @@ async function putDataExe(req, res){
       await configModel.update(newDataExe, { where: { id: Number(1) }});
       const config = await configModel.findOne({ where: { id: Number(1) }});
       const dataExe = dateUtils.formatoTimeStampBR(config.dataExe);
+      console.log(`Data do executável atualizada: ${dataExe}`);
 
       return res.status(200).json({ dataExe });
    } 
