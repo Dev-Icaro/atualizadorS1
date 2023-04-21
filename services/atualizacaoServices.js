@@ -8,6 +8,7 @@ async function getDataExe(){
    try {
       const config = await configModel.findOne({ where: { id: Number(1) }});
       const dataExe = dateUtils.formatoTimeStampBR(config.dataExe);
+      console.log(`Enviando data do executável: ${dataExe}`);
 
       return dataExe;
    } 
