@@ -1,16 +1,18 @@
 const dataBase         = require('../api/models');
+const dateUtils        = require('../utils/dateUtils');
 const configModel      = dataBase.config;
 const atualizacaoModel = dataBase.atualizacoes;
 
+
 async function getDataExe(){
    try {
-      const config = await configModel.findOne({ where: { id: Number(1) }})
-      const dataExe = new Date(config.dataExe).toLocaleString('pt-BR');
+      const config = await configModel.findOne({ where: { id: Number(1) }});
+      const dataExe = dateUtils.formatoTimeStampBR(config.dataExe);
 
       return dataExe;
    } 
    catch (error) {
-      return res.status(500).json(error.message);
+      throw error;
    };
 };
 
@@ -20,7 +22,7 @@ async function putDataExe(req, res){
 
       await configModel.update(newDataExe, { where: { id: Number(1) }});
       const config = await configModel.findOne({ where: { id: Number(1) }});
-      const dataExe = new Date(config.dataExe).toLocaleString('pt-BR');
+      const dataExe = dateUtils.formatoTimeStampBR(config.dataExe);
 
       return res.status(200).json({ dataExe });
    } 
