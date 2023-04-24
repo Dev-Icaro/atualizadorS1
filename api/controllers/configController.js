@@ -1,5 +1,4 @@
 const dataBase = require('../models');
-const dateUtils = require('/')
 const configs = dataBase.config;
 
 class configController{
