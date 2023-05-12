@@ -9,20 +9,14 @@ router.get('/atualizacao',
 );
 
 router.route('/atualizacao/dataExecutavel')
-   .put(
-      atualizacaoServices.putDataExe
-   )
+   .put(atualizacaoServices.putDataExe)
 
 router.route('/atualizacao/:cnpj')
-   .get(
-      atualizacaoController.getAtualizacao
-   )
+   .get(atualizacaoController.getAtualizacao)
+   .delete(atualizacaoController.deletaAtualizacao)
    .post(
       atualizacaoServices.validaPostAtualizacao,
       atualizacaoController.postAtualizacao
    )
-   .delete(
-      atualizacaoController.deletaAtualizacao
-   )
-
+   
 module.exports = router;
