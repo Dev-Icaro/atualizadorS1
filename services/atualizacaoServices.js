@@ -1,5 +1,7 @@
 const dataBase         = require('../api/models');
 const dateUtils        = require('../utils/dateUtils');
+const atualizacaoUtils = require('../utils/atualizacaoUtils');
+const atualizacaoConstants = require('../constants/atualizacaoConstants')
 const configModel      = dataBase.config;
 const atualizacaoModel = dataBase.atualizacoes;
 
@@ -47,6 +49,25 @@ async function validaPostAtualizacao(req, res, next){
    };
 };
 
+async function getPTStatusOfCnpj(cnpj) {
+   if (await atualizacaoUtils.cnpjIsInAtualizacoes(cnpj)) {
+      const dataExe = await atualizacaoUtils.getDataExePrecaTop();
+
+      return { atualizar: true, dataExe: dataExe };
+   } 
+   else {
+      return { atualizar: false };
+   };
+};
+
+async function updateDataExePT(newDataExe) {
+   await configModel.update(newDataExe, { where: { id: Number(1) } });
+
+   return atualizacaoConstants.dataExePrecaTopSuccess;
+}
+
 exports.putDataExe            = putDataExe;
 exports.getDataExe            = getDataExe;
 exports.validaPostAtualizacao = validaPostAtualizacao;
+exports.getPTStatusByCnpj     = getPTStatusOfCnpj
+exports.updateDataExePT       = updateDataExePT;

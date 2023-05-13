@@ -1,10 +1,20 @@
 const sysUtils = require('../utils/sysUtils');
 
-function formatoTimeStampBR(timeStamp){
-   return formatDateTime('DD/MM/YYYY hh:mm:ss', timeStamp);
+function formatoTimeStampBR(timeStampExterior){
+   const timeStamp = new Date(timeStampExterior);
+   const dia = sysUtils.adicionaZeroEsquerda(timeStamp.getDate());
+   const mes = sysUtils.adicionaZeroEsquerda((timeStamp.getMonth() + 1));
+   const ano = timeStamp.getFullYear();
+   const horas = sysUtils.adicionaZeroEsquerda(timeStamp.getHours());
+   const minutos = sysUtils.adicionaZeroEsquerda(timeStamp.getMinutes());
+   const segundos = sysUtils.adicionaZeroEsquerda(timeStamp.getSeconds());
+
+   return `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
 };
 
 function formatDateTime(format, dateTime){
+   dateTime = new Date(dateTime);
+
    // Dia 
    const dia = new RegExp('DD', 'i');
    dataFormatada = format.replace(dia, sysUtils.adicionaZeroEsquerda(dateTime.getDate()));
