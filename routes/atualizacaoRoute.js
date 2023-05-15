@@ -20,6 +20,7 @@ router.route('/atualizacao/:cnpj')
 router.route('/PrecaTop/atualizacao/:cnpj')
    .get(atualizacaoController.getAtualizacaoPrecaTop);
 
-router.put('/PrecaTop/atualizacao/dataExecutavel', atualizacaoController.putDataExePrecaTop);
+router
+   .put('/PrecaTop/atualizacao/dataExecutavel', atualizacaoController.putDataExePrecaTop);
 
 module.exports = router;
