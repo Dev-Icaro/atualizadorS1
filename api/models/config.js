@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   config.init({
-    dataExe: DataTypes.DATE
+    dataExe: DataTypes.DATE,
+    dataExePrecaTop: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'config',

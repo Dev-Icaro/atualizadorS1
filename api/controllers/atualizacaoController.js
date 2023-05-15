@@ -1,4 +1,5 @@
 const { getDataExe } = require('../../services/atualizacaoServices');
+const atualizacaoService = require('../../services/atualizacaoServices');
 const dataBase = require('../models');
 
 class atualizacaoController {
@@ -54,6 +55,31 @@ class atualizacaoController {
          return res.status(500).json(error.message);
       };
    };
+
+   static async getAtualizacaoPrecaTop(req, res) {
+      try {
+         const { cnpj } = req.params;
+         const serviceResponse = await atualizacaoService.getPTStatusByCnpj(cnpj);
+
+         return res.status(200).json(serviceResponse);
+      } 
+      catch (error) {
+         console.log(error.message);
+         return res.status(500).json(error.message);
+      };
+   };
+
+   static async putDataExePrecaTop(req, res) {
+      try {
+         const serviceResponse = await atualizacaoService.updateDataExePT(req.body);
+         
+         return res.status(200).json(serviceResponse);
+      } 
+      catch (error) {
+         console.log(error.message);
+         return res.status(500).json(error.message);
+      }
+   }
 };
 
 module.exports = atualizacaoController;
